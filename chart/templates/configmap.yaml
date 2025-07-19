@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "inforce-task.fullname" . }}-config
+data:
+  SERVER_PORT: {{ .Values.config.SERVER_PORT | quote }}
+  RARIBLE_BASE_URL: {{ .Values.config.RARIBLE_BASE_URL | quote }}

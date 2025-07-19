@@ -1,0 +1,98 @@
+basePath: /
+definitions:
+  dto.CollectionTrait:
+    properties:
+      collectionId:
+        type: string
+      properties:
+        items:
+          $ref: '#/definitions/dto.TraitProperty'
+        type: array
+    required:
+    - collectionId
+    - properties
+    type: object
+  dto.TraitProperty:
+    properties:
+      key:
+        type: string
+      value:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Rarible Client API for fetching NFT data
+  title: Inforce Task API
+  version: "1.0"
+paths:
+  /ownership:
+    get:
+      consumes:
+      - application/json
+      description: Returns NFT ownerships for a given wallet address.
+      parameters:
+      - description: Wallet Address
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get Ownership
+      tags:
+      - rarible
+  /traits:
+    post:
+      consumes:
+      - application/json
+      description: Returns traits of items in a specific NFT collection.
+      parameters:
+      - description: Collection and trait filters
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CollectionTrait'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get Collection Traits
+      tags:
+      - rarible
+swagger: "2.0"

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "inforce-task.fullname" . }}
+  labels:
+    app: {{ include "inforce-task.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "inforce-task.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "inforce-task.name" . }}
+    spec:
+      containers:
+        - name: {{ include "inforce-task.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          env:
+            # из ConfigMap
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "inforce-task.fullname" . }}-config
+                  key: SERVER_PORT
+            - name: RARIBLE_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "inforce-task.fullname" . }}-config
+                  key: RARIBLE_BASE_URL
+            # из Secret
+            - name: RARIBLE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "inforce-task.fullname" . }}-secret
+                  key: RARIBLE_API_KEY

@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "e0304910-3b26-4de3-a36f-7ee3e5f66dd1",
+		"name": "Rarible Client",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26309335"
+	},
+	"item": [
+		{
+			"name": "GetOwnership",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "{{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/ownership?id=MOONBEAM:0xee47e6eea210c5fdd601678458d018c02ca9305b:588:0x7a99ca17ac3ce3dde19990e691036ea413c52774",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"ownership"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "MOONBEAM:0xee47e6eea210c5fdd601678458d018c02ca9305b:588:0x7a99ca17ac3ce3dde19990e691036ea413c52774"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTraits",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"collectionId\": \"ETHEREUM:0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\r\n    \"properties\": [\r\n        {\r\n            \"key\": \"Halo\",\r\n            \"value\": \"Skelet\"\r\n        },\r\n        {\r\n            \"key\": \"Eyes\",\r\n            \"value\": \"Laser\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/traits/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"traits",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "api_key",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

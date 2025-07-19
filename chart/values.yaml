@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: cmak12/inforce-task
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+config:
+  SERVER_PORT: "8080"
+  RARIBLE_BASE_URL: "https://api.rarible.org/v0.1"
+
+secret:
+  RARIBLE_API_KEY: ""
+
+resources: {}
